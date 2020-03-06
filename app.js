@@ -26,6 +26,7 @@ app.post("/", function(req, res){
     response.on("data", function(data){
       const searchData = JSON.parse(data);
       const resultNum = searchData.results.length;
+      res.write("<html lang='en' dir='ltr'>")
       res.write("<h1>Itunes Music Searcher</h1>");
       res.write("<input type='text' name='query'>");
 
@@ -43,6 +44,7 @@ app.post("/", function(req, res){
 
 
       res.write("</table>");
+      res.write('</html>');
       res.send();
     });
   });
