@@ -21,15 +21,16 @@ app.post("/", function(req, res){
   const url = "https://itunes.apple.com/search?term=" + query + "&limit=5";
 
   https.get(url, function(response) {
-    console.log(response.statusCode);
+
 
     response.on("data", function(data){
       const searchData = JSON.parse(data);
       const resultNum = searchData.results.length;
       res.write("<html lang='en' dir='ltr'>")
       res.write("<h1>Itunes Music Searcher</h1>");
+      res.write("<form action='/' method='post'>")
       res.write("<input type='text' name='query'>");
-
+      res.write("</form>")
       res.write("<table style='border: 1px solid black;'>");
       for(var i = 0 ; i<resultNum ; i++){
         res.write("<tr style='border: 1px solid black;'>");
@@ -45,6 +46,7 @@ app.post("/", function(req, res){
 
       res.write("</table>");
       res.write('</html>');
+      console.log(response.statusCode);
       res.send();
     });
   });
@@ -58,7 +60,7 @@ app.get("/:trackId", function(req, res){
 
     response.on("data", function(data){
       const songData = JSON.parse(data);
-
+      console.log(songData);
       res.write("<html lang='en' dir='ltr'>")
       res.write("<h1>Itunes Music Searcher</h1>");
       res.write("<a href="+'/'+">Go Back</a><br>");
