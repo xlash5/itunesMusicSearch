@@ -60,7 +60,7 @@ app.get("/:trackId", function(req, res){
 
     response.on("data", function(data){
       const songData = JSON.parse(data);
-      console.log(songData);
+      
       res.write("<html lang='en' dir='ltr'>")
       res.write("<h1>Itunes Music Searcher</h1>");
       res.write("<a href="+'/'+">Go Back</a><br>");
