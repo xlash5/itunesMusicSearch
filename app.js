@@ -60,17 +60,8 @@ app.get("/:trackId", function(req, res){
 
     response.on("data", function(data){
       const songData = JSON.parse(data);
-      
-      res.write("<html lang='en' dir='ltr'>")
-      res.write("<h1>Itunes Music Searcher</h1>");
-      res.write("<a href="+'/'+">Go Back</a><br>");
-      res.write("<img src=" + songData.results[0].artworkUrl100 + "><br>");
-      res.write("<h2>" + songData.results[0].artistName + '-' + songData.results[0].trackName + "</h2><br>");
-      res.write("<h3>Preview:</h3><br>");
-      res.write('<audio controls src='+songData.results[0].previewUrl+'></audio>');
-      res.write('</html>');
 
-      res.send();
+      res.render("songInfo", {artworkUrl100: songData.results[0].artworkUrl100, artistName: songData.results[0].artistName, trackName: songData.results[0].trackName, previewUrl: songData.results[0].previewUrl});
     });
   });
 });
